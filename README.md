@@ -11,3 +11,4 @@
 
 ## Content
 
+- [Week 1: Regex, DFA, NFA & Kleene's Theorem](note/Week1.md)
