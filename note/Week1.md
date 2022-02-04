@@ -26,8 +26,8 @@ Regular Expression determines a subset of words that match the regexp.
 | E \| F             | Match E or F                                                 |
 | EF (juxtaposition) | Match concatenation of E and F (by Order)                    |
 | a(b\|c)            | Match ab or ac (Could consider b \| c as expression d, so original formula would be ad) |
-| E*                 | Match E several times incl. 0 time                           |
-| a*                 | Match $\epsilon$, $a$, $aa$, $aaa$, etc.                     |
+| E\*                 | Match E several times incl. 0 time                           |
+| a\*                 | Match $\epsilon$, $a$, $aa$, $aaa$, etc.                     |
 | 0                  | Match no word                                                |
 
 `|` is or (exclusive)
@@ -53,9 +53,23 @@ $E? = \epsilon\mid E$
 1. States
 2. Transitions (between states)
 
-![](img/Week1/auto.png)
+## Deterministic Finite Automata
+
+Aka. 确定有限状态自动机/DFA
+
+### Definition
+
+A DFA consists of following data:
+
+- A finite set $X$ of states (Aka $Q$)
+- A finite alphabet $\Sigma$
+- An initial state $p \in X$
+- A transition function: $\delta: X \times \Sigma \to X$
+- A set of accepting states $\text{Acc}\subseteq X$ (Aka. $F$)
 
 ### Example
+
+![](img/Week1/auto.png)
 
 **States:** nodes  
 In this example, 5 states: 7, 3, 2, 95, 18
@@ -71,9 +85,37 @@ In this example, is 2.
 
 If a input can reach accepting state as its endpoint, then the input is accepted by the automata or it is rejected.
 
+$$
+\begin{align}
+X =& \left\{7,2,3,95,18 \right\}\\
+p =& 7\\
+\delta =& \left\{(7,  a)\mapsto18, (7 , b)\mapsto18, (7, c)\mapsto2 ,\right.\\
+          &\left.(2,  a)\mapsto18, (2 , b)\mapsto3 , (2, c)\mapsto95,\right.\\
+          &\left.(3,  a)\mapsto18, (3 , b)\mapsto2 , (3, c)\mapsto18,\right.\\
+          &\left.(95, a)\mapsto2 , (95, b)\mapsto18, (95, c)\mapsto18,\right.\\
+          &\left.(18, a)\mapsto18, (18, b)\mapsto18, (18, c)\mapsto18 \right\}\\
+\text{Acc} =& \left\{2 \right\}\\
+\end{align}
+$$
+
 ## Nondeterministic Finite Automata
 
 Aka. 非确定有限状态自动机/NFA
+
+### Definition
+
+A NFA consists of following data:
+
+- A finite set $X$ of states (Aka $Q$)
+- A finite alphabet $\Sigma$
+- An initial state $p \in X$  
+  However, it is not necessary~~,  so it could be $p \subseteq X$~~
+- A transition function: $\delta: X \times \Sigma_\epsilon \to \mathcal{P}(X)$  
+  $\mathcal{P}$ is *power set*  
+  $\Sigma_\epsilon =\Sigma\cup \left\{ \epsilon \right\}$
+- A set of accepting states $\text{Acc}\subseteq X$ (Aka. $F$)
+
+### Difference from DFA
 
 Different from deterministic automata (DFA)
 1. Can have more than 1 initial state  
@@ -112,9 +154,9 @@ $$
 
 ## ɛ-Transitions
 
-It occurs on ɛ-NFA
+It occurs on ɛ-NFA.
 
-E.g.
+**Example:**
 
 ```
 -> [1] <-a-> [2] -ɛ-> [3] <-b-> [[4]]
@@ -168,7 +210,7 @@ More focus on $(i) \Rightarrow (ii)$
 
 ### Build Automata from Regex
 
-A regexp builds over $\left\{a, b\right\}=\sum$, could be $a$, $b$, $\epsilon$, $E_0 \mid E_1$, $E_0E_1$, $E^*$.
+A regexp builds over $\left\{a, b\right\}=\Sigma$, could be $a$, $b$, $\epsilon$, $E_0 \mid E_1$, $E_0E_1$, $E^*$.
 
 #### Basic Building Blocks
 
@@ -184,6 +226,8 @@ Basic building blocks:
 
 ![](img/Week1/build-automata-or.png)
 
+> Diagram uses $N$ instead of $E$.
+
 1. Construct an ɛNFA that recongise $E_0 \mid E_1$
 2. Turn into an NFA
 3. Turn into a DFA
@@ -192,6 +236,8 @@ Basic building blocks:
 
 ![](img/Week1/build-automata-co.png)
 
+> Diagram uses $N$ instead of $E$.
+
 - Put $E_0$ to left, and $E_1$ to right.
 - Connect all **accepting points** of $E_0$ to the **initial state** of $E_1$ with **ɛ-transition**
 
@@ -199,11 +245,13 @@ Basic building blocks:
 
 ![](img/Week1/build-automata-star.png)
 
+> Diagram uses $N$ instead of $E$.
+
 **实现 $\epsilon$：** 对于 ɛ，我们可以构建一个 Accepting State 作为 initial state
 
 **实现 $\epsilon\mid E$：** 对于 $E$，我们可以使用一个 ɛ-transition 将 ɛ 与原来的 E 相连。这个操作相当于结果可以为 `-> Accept -ɛ-> E`，当输入为 ɛ，则会碰触到第一个 Accepting State，而其余则会通过 ɛ 转换跳转到后方的 E。
 
-**实现 $\epsilon\mid E\mid EE\mid EEE\mid \cdots$:** 将原始 $E$ 的所有 Accepting State 使用 ɛ-transition 链接到原始 $E$ 的 initial state上。因此当如果匹配 $EE$ 时，会先通过第一个 ɛ-transition 到达原始 $E$ 的 init state，然后当到达 accepting state 时，再通过 ɛ-transition 到达原始 $E$ 的 init state，最后再到达 accepting state。
+**实现 $\epsilon\mid E\mid EE\mid EEE\mid \cdots$ :** 将原始 $E$ 的所有 Accepting State 使用 ɛ-transition 链接到原始 $E$ 的 initial state上。因此当如果匹配 $EE$ 时，会先通过第一个 ɛ-transition 到达原始 $E$ 的 initial state，然后当到达 accepting state 时，再通过 ɛ-transition 到达原始 $E$ 的 initial state，最后再到达 accepting state。
 
 ## References
 
