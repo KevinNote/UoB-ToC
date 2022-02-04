@@ -1,5 +1,7 @@
 # Week 1: Regex, DFA, NFA & Kleene's Theorem
 
+04/02/2022 [KevinZonda](https://github.com/KevinZonda)
+
 ## Regular Expressions
 
 ### Definition
