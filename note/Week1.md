@@ -8,7 +8,7 @@
 
 **Language:** a set of words, i.e. a subset of all possible words
 
-**Alphabet:** often called $\sum$, $\sum=\left\{a, b, c\right\}$
+**Alphabet:** often called $\sum$, e.g. $\sum=\left\{a, b, c\right\}$
 
 **All Possible Words:** $\sum^*$, e.g. $bbab\in\sum^*$
 
@@ -18,19 +18,19 @@
 
 Regular Expression determines a subset of words that match the regexp.
 
-| Regexp             | Meaning                                                                                 |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| a                  | Match exact a                                                                           |
-| b                  | Match exact b                                                                           |
-| $\epsilon$         | Match empty string                                                                      |
-| E\| F              | Match E or F                                                                            |
-| EF (juxtaposition) | Match concatenation of E and F (by Order)                                               |
+| Regexp             | Meaning                                                      |
+| ------------------ | ------------------------------------------------------------ |
+| a                  | Match exact a                                                |
+| b                  | Match exact b                                                |
+| $\epsilon$         | Match empty string                                           |
+| E \| F             | Match E or F                                                 |
+| EF (juxtaposition) | Match concatenation of E and F (by Order)                    |
 | a(b\|c)            | Match ab or ac (Could consider b \| c as expression d, so original formula would be ad) |
-| E*                 | Match E several times incl. 0 time                                                      |
-| a*                 | Match $\epsilon$, $a$, $aa$, $aaa$, etc.                                                |
-| 0                  | Match no word                                                                           |
+| E*                 | Match E several times incl. 0 time                           |
+| a*                 | Match $\epsilon$, $a$, $aa$, $aaa$, etc.                     |
+| 0                  | Match no word                                                |
 
-| is or (exclusive)
+`|` is or (exclusive)
 
 #### Abbreviations
 
@@ -39,7 +39,7 @@ $E? = \epsilon\mid E$
 
 #### Precedence
 
-+ = ? = \* \> juxtaposition > |
+\+ = ? = \* \> juxtaposition > |
 
 ## Automata
 
@@ -84,17 +84,18 @@ Different from deterministic automata (DFA)
 
 ![](img/Week1/de.png)
 
-- 因为我们有两个输入，我们可以创建第一个输入组 `{3, 7}`  
-  寻找 3, 7 可执行的转换：a 和 b
-- 先构建 a 操作， 7 通过 a 可达到 2 和 3，而 3 无转换，故链接 `{3, 7} -a-> {2, 3}`。
+- 因为我们有两个输入，我们可以创建第一个输入状态 `->[{3, 7}]`
+- 寻找 3, 7 可执行的转换：a 和 b
+- 先构建 a 操作， 7 通过 a 可达到 2 和 3，而 3 无转换，故链接 `[{3, 7}] -a-> [{2, 3}]`。
   - 接着构建 {2, 3}，其可以进行 a 和 b 转换
-    - 当进行 a 转换时，2 可以到达 8，而 3 无操作，故链接 `{2, 3} -a-> {8}`。
+    - 当进行 a 转换时，2 可以到达 8，而 3 无操作，故链接 `[{2, 3}] -a-> [[{8}]]`。
       - 接着构建 8，发现其为 Accepting State，无操作
-    - 当进行 b 转换 时，2 可以到达 2（环） 和 3，而 3 可以到达 8，故链接 `{2, 3} -b-> {2, 3, 8}`。
-      - 接着构建 `{2, 3, 8}`
+    - 当进行 b 转换 时，2 可以到达 2（环） 和 3，而 3 可以到达 8，故链接 `[{2, 3}] -b-> [{2, 3, 8}]`。
+      - 接着构建 `[{2, 3, 8}]`
         - 8 为 Accepting State，无操作
-        - 而剩余的 2 和 3 与上一步类似，可以到达 `{2, 3, 8}`，与自身相同，故指向自己，即链接 `{2, 3, 8} -b-> {2, 3, 8}`。
-- 然后构建 b 操作，7 无转换，3 可以至 8，故链接 `{3, 7} -b-> {8}`。
+        - 而剩余的 2 和 3 与上一步类似，可以到达 `[{2, 3, 8}]`，与自身相同，故指向自己，即链接 `[{2, 3, 8}] -b-> [{2, 3, 8}]`。
+        - 并且其可以通过 a 转换至 `[[8]]`，链接 `[{2, 3, 8}] -a-> [[{8}]]`
+- 然后构建 b 操作，7 无转换，3 可以至 8，故链接 `[{3, 7}] -b-> [{8}]`。
   - 接着构建 8，发现其为 Accepting State，无操作
 - 完成 determinision
 
@@ -120,7 +121,7 @@ RESUL: NOT ACCEPTED: DECLINED DUE TO NO TRANS FOR THE LAST a
 
 ![](img/Week1/rm-eNFA.png)
 
-- 写下所有节点/State
+- 写下所有状态/State
 - 复制所有非 ɛ 转换：`[4] -a-> [5]`, `[5] -b-> [8]`
 - 思考所有 ɛ 链接
   - `[7] -ɛ-> [4] -a-> [5]`
@@ -156,7 +157,7 @@ More focus on $(i) \Rightarrow (ii)$
 
 ### Build Automata from Regex
 
-A regexp builds over $\left\{a, b\right\}=\sum$, could be $a$, $b$, $\epsilon$, $E_0 \mid E_1$, $E_0E_1$, $E^*$。
+A regexp builds over $\left\{a, b\right\}=\sum$, could be $a$, $b$, $\epsilon$, $E_0 \mid E_1$, $E_0E_1$, $E^*$.
 
 #### Basic Building Blocks
 
