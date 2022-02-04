@@ -261,3 +261,5 @@ Basic building blocks:
   <https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton>
 - Deterministic finite automaton - Wikipedia  
   <https://en.wikipedia.org/wiki/Deterministic_finite_automaton>
+- Introduction to the Theory of Computation 3rd Edition pp. 31-69  
+  Michael Sipser
