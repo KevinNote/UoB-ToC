@@ -61,9 +61,10 @@ $E? = \epsilon\mid E$
 In this example, 5 states: 7, 3, 2, 95, 18
 
 **Transitions:** arrows between states  
-E.g. $1 \stackrel{a}{\longrightarrow}18$
+E.g. $7 \stackrel{a,b}{\longrightarrow}18$
 
-The **initial states** is represented as the **arrow** neer state 1.
+**Initial states:** a state with the **begin-free arrow**.  
+In this example, is 7.
 
 **Accepting state:** a node with double circles.  
 In this example, is 2.
@@ -75,14 +76,24 @@ If a input can reach accepting state as its endpoint, then the input is accepted
 Aka. 非确定有限状态自动机/NFA
 
 Different from deterministic automata (DFA)
-1. Can have more than 1 initial state
-2. Can have more than 1 transition from a given state for a given input.
+1. Can have more than 1 initial state  
+   i.e. Multiple entrances
+2. Can have more than 1 transition from a given state for a given input.  
+   i.e. the same name transition can trans to different state  
 
-![](img/Week1/NFA.png)
+| ![](img/Week1/NFA-ex1.png) | ![](img/Week1/NFA-ex2.png) |
+| :---: | :---: |
+| Rule 1 | Rule 2 |
 
 ## Determinising an NFA
 
-![](img/Week1/de.png)
+$$
+\text{NFA}\longrightarrow \text{DFA}
+$$
+
+| ![](img/Week1/de-NFA.png) | ![](img/Week1/de-DFA.png) |
+| :--: | :--: |
+| NFA | DFA |
 
 - 因为我们有两个输入，我们可以创建第一个输入状态 `->[{3, 7}]`
 - 寻找 3, 7 可执行的转换：a 和 b
@@ -97,7 +108,7 @@ Different from deterministic automata (DFA)
         - 并且其可以通过 a 转换至 `[[8]]`，链接 `[{2, 3, 8}] -a-> [[{8}]]`
 - 然后构建 b 操作，7 无转换，3 可以至 8，故链接 `[{3, 7}] -b-> [{8}]`。
   - 接着构建 8，发现其为 Accepting State，无操作
-- 完成 determinision
+- 完成 determination
 
 ## ɛ-Transitions
 
@@ -163,7 +174,11 @@ A regexp builds over $\left\{a, b\right\}=\sum$, could be $a$, $b$, $\epsilon$, 
 
 Basic building blocks:
 
-![](img/Week1/build-automata-trans.png)
+| Regex | Block |
+| ---- | --- |
+| a | ![](img/Week1/build-automata-a.png) |
+| $\epsilon$  | ![](img/Week1/build-automata-epsilon.png) |
+| 0 | ![](img/Week1/build-automata-0.png) |
 
 #### $E_0\mid E_1$
 
