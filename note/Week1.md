@@ -4,6 +4,8 @@
 
 ## Regular Expressions
 
+Aka. 正则表达式/Regex
+
 ### Definition
 
 **Purpose:** To specify a language
@@ -20,17 +22,17 @@
 
 Regular Expression determines a subset of words that match the regexp.
 
-| Regexp             | Meaning                                                                                 |
-| ------------------ | --------------------------------------------------------------------------------------- |
-| a                  | Match exact a                                                                           |
-| b                  | Match exact b                                                                           |
-| $\varepsilon$      | Match empty string                                                                      |
-| E \| F             | Match E or F                                                                            |
-| EF (juxtaposition) | Match concatenation of E and F (by Order)                                               |
+| Regex              | Meaning                                                      |
+| ------------------ | ------------------------------------------------------------ |
+| a                  | Match exact a                                                |
+| b                  | Match exact b                                                |
+| $\varepsilon$      | Match empty string                                           |
+| E \| F             | Match E or F                                                 |
+| EF (juxtaposition) | Match concatenation of E and F (by Order)                    |
 | a(b\|c)            | Match ab or ac (Could consider b \| c as expression d, so original formula would be ad) |
-| E\*                | Match E several times incl. 0 time                                                      |
-| a\*                | Match $\varepsilon$, $a$, $aa$, $aaa$, etc.                                             |
-| 0                  | Match no word                                                                           |
+| E\*                | Match E several times incl. 0 time                           |
+| a\*                | Match $\varepsilon$, $a$, $aa$, $aaa$, etc.                  |
+| 0                  | Match no word                                                |
 
 `|` is or (exclusive)
 
@@ -194,7 +196,7 @@ RESUL: NOT ACCEPTED: DECLINED DUE TO NO TRANS FOR THE LAST a
 
 ### Definition
 
-Given a language $L \subseteq \sum^*$
+Given a language $L \subseteq \Sigma^*$
 
 i. $L$ can be described by a regex
 
@@ -251,7 +253,7 @@ Basic building blocks:
 
 **实现 $\varepsilon$：** 对于 ɛ，我们可以构建一个 Accepting State 作为 initial state
 
-**实现 $\varepsilon\mid E$：** 对于 $E$，我们可以使用一个 ɛ-transition 将 ɛ 与原来的 E 相连。这个操作相当于结果可以为 `-> Accept -ɛ-> E`，当输入为 ɛ，则会碰触到第一个 Accepting State，而其余则会通过 ɛ 转换跳转到后方的 E。
+**实现 $\varepsilon\mid E$：** 对于 $E$，我们可以使用一个 ɛ-transition 将 ɛ 与原来的 E 相连。这个操作相当于结果可以为 `-> Acc -ɛ-> E`，当输入为 ɛ，则会碰触到第一个 Accepting State，而其余则会通过 ɛ 转换跳转到后方的 E。
 
 **实现 $\varepsilon\mid E\mid EE\mid EEE\mid \cdots$ :** 将原始 $E$ 的所有 Accepting State 使用 ɛ-transition 链接到原始 $E$ 的 initial state上。因此当如果匹配 $EE$ 时，会先通过第一个 ɛ-transition 到达原始 $E$ 的 initial state，然后当到达 accepting state 时，再通过 ɛ-transition 到达原始 $E$ 的 initial state，最后再到达 accepting state。
 
