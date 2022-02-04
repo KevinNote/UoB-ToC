@@ -18,24 +18,24 @@
 
 Regular Expression determines a subset of words that match the regexp.
 
-| Regexp             | Meaning                                                      |
-| ------------------ | ------------------------------------------------------------ |
-| a                  | Match exact a                                                |
-| b                  | Match exact b                                                |
-| $\epsilon$         | Match empty string                                           |
-| E \| F             | Match E or F                                                 |
-| EF (juxtaposition) | Match concatenation of E and F (by Order)                    |
+| Regexp             | Meaning                                                                                 |
+| ------------------ | --------------------------------------------------------------------------------------- |
+| a                  | Match exact a                                                                           |
+| b                  | Match exact b                                                                           |
+| $\varepsilon$      | Match empty string                                                                      |
+| E \| F             | Match E or F                                                                            |
+| EF (juxtaposition) | Match concatenation of E and F (by Order)                                               |
 | a(b\|c)            | Match ab or ac (Could consider b \| c as expression d, so original formula would be ad) |
-| E\*                 | Match E several times incl. 0 time                           |
-| a\*                 | Match $\epsilon$, $a$, $aa$, $aaa$, etc.                     |
-| 0                  | Match no word                                                |
+| E\*                | Match E several times incl. 0 time                                                      |
+| a\*                | Match $\varepsilon$, $a$, $aa$, $aaa$, etc.                                             |
+| 0                  | Match no word                                                                           |
 
 `|` is or (exclusive)
 
 #### Abbreviations
 
 $E^+ = EE^*$  
-$E? = \epsilon\mid E$
+$E? = \varepsilon\mid E$
 
 #### Precedence
 
@@ -110,9 +110,9 @@ A NFA consists of following data:
 - A finite alphabet $\Sigma$
 - An initial state $p \in X$  
   However, it is not necessary~~,  so it could be $p \subseteq X$~~
-- A transition function: $\delta: X \times \Sigma_\epsilon \to \mathcal{P}(X)$  
+- A transition function: $\delta: X \times \Sigma_\varepsilon \to \mathcal{P}(X)$  
   $\mathcal{P}$ is *power set*  
-  $\Sigma_\epsilon =\Sigma\cup \left\{ \epsilon \right\}$
+  $\Sigma_\varepsilon =\Sigma\cup \left\{ \varepsilon \right\}$
 - A set of accepting states $\text{Acc}\subseteq X$ (Aka. $F$)
 
 ### Difference from DFA
@@ -124,8 +124,8 @@ Different from deterministic automata (DFA)
    i.e. the same name transition can trans to different state  
 
 | ![](img/Week1/NFA-ex1.png) | ![](img/Week1/NFA-ex2.png) |
-| :---: | :---: |
-| Rule 1 | Rule 2 |
+| :------------------------: | :------------------------: |
+|           Rule 1           |           Rule 2           |
 
 ## Determinising an NFA
 
@@ -134,8 +134,8 @@ $$
 $$
 
 | ![](img/Week1/de-NFA.png) | ![](img/Week1/de-DFA.png) |
-| :--: | :--: |
-| NFA | DFA |
+| :-----------------------: | :-----------------------: |
+|            NFA            |            DFA            |
 
 - 因为我们有两个输入，我们可以创建第一个输入状态 `->[{3, 7}]`
 - 寻找 3, 7 可执行的转换：a 和 b
@@ -210,17 +210,17 @@ More focus on $(i) \Rightarrow (ii)$
 
 ### Build Automata from Regex
 
-A regexp builds over $\left\{a, b\right\}=\Sigma$, could be $a$, $b$, $\epsilon$, $E_0 \mid E_1$, $E_0E_1$, $E^*$.
+A regexp builds over $\left\{a, b\right\}=\Sigma$, could be $a$, $b$, $\varepsilon$, $E_0 \mid E_1$, $E_0E_1$, $E^*$.
 
 #### Basic Building Blocks
 
 Basic building blocks:
 
-| Regex | Block |
-| ---- | --- |
-| a | ![](img/Week1/build-automata-a.png) |
-| $\epsilon$  | ![](img/Week1/build-automata-epsilon.png) |
-| 0 | ![](img/Week1/build-automata-0.png) |
+| Regex         | Block                                     |
+| ------------- | ----------------------------------------- |
+| a             | ![](img/Week1/build-automata-a.png)       |
+| $\varepsilon$ | ![](img/Week1/build-automata-epsilon.png) |
+| 0             | ![](img/Week1/build-automata-0.png)       |
 
 #### $E_0\mid E_1$
 
@@ -247,11 +247,11 @@ Basic building blocks:
 
 > Diagram uses $N$ instead of $E$.
 
-**实现 $\epsilon$：** 对于 ɛ，我们可以构建一个 Accepting State 作为 initial state
+**实现 $\varepsilon$：** 对于 ɛ，我们可以构建一个 Accepting State 作为 initial state
 
-**实现 $\epsilon\mid E$：** 对于 $E$，我们可以使用一个 ɛ-transition 将 ɛ 与原来的 E 相连。这个操作相当于结果可以为 `-> Accept -ɛ-> E`，当输入为 ɛ，则会碰触到第一个 Accepting State，而其余则会通过 ɛ 转换跳转到后方的 E。
+**实现 $\varepsilon\mid E$：** 对于 $E$，我们可以使用一个 ɛ-transition 将 ɛ 与原来的 E 相连。这个操作相当于结果可以为 `-> Accept -ɛ-> E`，当输入为 ɛ，则会碰触到第一个 Accepting State，而其余则会通过 ɛ 转换跳转到后方的 E。
 
-**实现 $\epsilon\mid E\mid EE\mid EEE\mid \cdots$ :** 将原始 $E$ 的所有 Accepting State 使用 ɛ-transition 链接到原始 $E$ 的 initial state上。因此当如果匹配 $EE$ 时，会先通过第一个 ɛ-transition 到达原始 $E$ 的 initial state，然后当到达 accepting state 时，再通过 ɛ-transition 到达原始 $E$ 的 initial state，最后再到达 accepting state。
+**实现 $\varepsilon\mid E\mid EE\mid EEE\mid \cdots$ :** 将原始 $E$ 的所有 Accepting State 使用 ɛ-transition 链接到原始 $E$ 的 initial state上。因此当如果匹配 $EE$ 时，会先通过第一个 ɛ-transition 到达原始 $E$ 的 initial state，然后当到达 accepting state 时，再通过 ɛ-transition 到达原始 $E$ 的 initial state，最后再到达 accepting state。
 
 ## References
 
