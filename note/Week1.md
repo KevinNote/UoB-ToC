@@ -10,9 +10,9 @@
 
 **Language:** a set of words, i.e. a subset of all possible words
 
-**Alphabet:** often called $\sum$, e.g. $\sum=\left\{a, b, c\right\}$
+**Alphabet:** often called $\Sigma$, e.g. $\Sigma=\left\{a, b, c\right\}$
 
-**All Possible Words:** $\sum^*$, e.g. $bbab\in\sum^*$
+**All Possible Words:** $\Sigma^*$, e.g. $bbab\in\Sigma^*$
 
 ### Grammars
 
@@ -96,7 +96,7 @@ p =& 7\\
           &\left.(3,  a)\mapsto18, (3 , b)\mapsto2 , (3, c)\mapsto18,\right.\\
           &\left.(95, a)\mapsto2 , (95, b)\mapsto18, (95, c)\mapsto18,\right.\\
           &\left.(18, a)\mapsto18, (18, b)\mapsto18, (18, c)\mapsto18 \right\}\\
-\text{Acc} =& \left\{2 \right\}\\
+\text{Acc} =& \left\{2 \right\}
 \end{align}
 $$
 
