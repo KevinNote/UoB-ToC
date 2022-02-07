@@ -232,7 +232,7 @@ Basic building blocks:
 
 > Diagram uses $N$ instead of $E$.
 
-1. Construct an ɛNFA that recongise $E_0 \mid E_1$
+1. Construct an ɛNFA that recognise $E_0 \mid E_1$
 2. Turn into an NFA
 3. Turn into a DFA
 
