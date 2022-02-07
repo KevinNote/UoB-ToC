@@ -90,7 +90,7 @@ In this example, is 2.
 If a input can reach accepting state as its endpoint, then the input is accepted by the automata or it is rejected.
 
 $$
-\begin{align}
+\begin{aligned}
 X =& \left\{7,2,3,95,18 \right\}\\
 p =& 7\\
 \delta =& \left\{(7,  a)\mapsto18, (7 , b)\mapsto18, (7, c)\mapsto2 ,\right.\\
@@ -99,7 +99,7 @@ p =& 7\\
           &\left.(95, a)\mapsto2 , (95, b)\mapsto18, (95, c)\mapsto18,\right.\\
           &\left.(18, a)\mapsto18, (18, b)\mapsto18, (18, c)\mapsto18 \right\}\\
 \text{Acc} =& \left\{2 \right\}
-\end{align}
+\end{aligned}
 $$
 
 ## Nondeterministic Finite Automata
