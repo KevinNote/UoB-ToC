@@ -1,4 +1,4 @@
-# Week 3:
+# Week 3: Induction & Context-free Language
 
 ## Induction
 
@@ -32,7 +32,7 @@ Let $P\in\mathbb{N}$
 *Assume:* $n\in\mathbb{N}$ and $n\geq 0$, $\forall n'\in \mathbb{N},\ n'\in[1, n).\ P(n') \text{ is true}$  
 *Proof:* $P(n)$ is True.
 
-## Context-Free Language
+## Context-free Language
 
 ### Definition
 
