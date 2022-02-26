@@ -319,4 +319,5 @@ We cannot test whether 2 CFGs accepts *every* word over the given alphabet. It i
 
 ## References
 
-Mathematical Induction - Stanford University - <https://web.stanford.edu/class/archive/cs/cs103/cs103.1134/lectures/04/Small04.pdf>
+1. Mathematical Induction - Stanford University - <https://web.stanford.edu/class/archive/cs/cs103/cs103.1134/lectures/04/Small04.pdf>
+2. Chomsky normal form - Wikipedia - <https://en.wikipedia.org/wiki/Chomsky_normal_form>
