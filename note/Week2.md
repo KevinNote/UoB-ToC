@@ -59,6 +59,7 @@ I.e. We have to find a word that can be only accepted from one state, but not th
   - `{7, 8}` 无法通过 a 转换至 `{4, 6}`
   - 拆分 `{3, 5, 7, 8}` 为 `{3, 5}` 和 `{7, 8}`
   - 链接 `{3, 5} -a-> {4, 6}`
+
 以类似方式绘制所有原图的链接，直到绘制结束
 
 ![](img/Week2/minimise-end.png)
@@ -97,7 +98,7 @@ Suppose have state $x_n$ reached after reading $n$ "(" for any $n \in \mathbb{N}
 
 Therefore, $x_m \neq x_n$ for any $m \neq n$.
 
-Suppose $m<n$ we want to show $x_m \neq x_n$. If we start at $x_m$ and read $)^m$, we canreach an accepting state, due to $(^m)^m\in L$.
+Suppose $m<n$ we want to show $x_m \neq x_n$. If we start at $x_m$ and read $)^m$, we can reach an accepting state, due to $(^m)^m\in L$.
 
 However, if we start at $x_n$ and read $)^m$ we reach a non-accepting state, due to $(^m)^m\notin L$.
 
