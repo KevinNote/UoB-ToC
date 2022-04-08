@@ -14,3 +14,5 @@
 - [Week 1: Regex, DFA, NFA & Kleene's Theorem](note/Week1.md)
 - [Week 2: Equivalence, Minimal, Minimisation Automata & Non-regular Language](note/Week2.md)
 - [Week 3: Induction & Context-free Language](note/Week3.md)
+- [Week 4: Complexity](note/Week4.md)
+- [Week 5: Turing Machine](note/Week5.md)
