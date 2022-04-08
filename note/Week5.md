@@ -46,7 +46,7 @@ $$
     &6 &\mapsto& Return\ \text{Even}\\
     &5 &\mapsto& Read(a\mapsto 2, b\mapsto 1, ␣\mapsto 73)\\
     &73&\mapsto& Return\ \text{Odd}\\
-    &1 &\mapsto& Right 5\\
+    &1 &\mapsto& Right\ 5\\
 \}&
 \end{aligned}
 \end{aligned}
@@ -58,14 +58,14 @@ $$
 
 对于其使用，例如：
 
-| Tape | State | Oper |
-| --- | --- | --- |
-| $\dot{b}aba$ | 5 | $\text{Read }b$ |
-| $\dot{b}aba$ | 12 | $\text{Right}$ |
-| $b\dot{a}ba$ | 5 | $\text{Read }a$ |
-| $b\dot{a}ba$ | 3 | $\text{Write }b$ |
-| $b\dot{b}ba$ | 4 | $\text{Right}$ |
-| $bb\dot{b}a$ | 5 | $\text{Read }b$ |
+| Tape         | State | Oper             |
+| ------------ | ----- | ---------------- |
+| $\dot{b}aba$ | 5     | $\text{Read }b$  |
+| $\dot{b}aba$ | 12    | $\text{Right}$   |
+| $b\dot{a}ba$ | 5     | $\text{Read }a$  |
+| $b\dot{a}ba$ | 3     | $\text{Write }b$ |
+| $b\dot{b}ba$ | 4     | $\text{Right}$   |
+| $bb\dot{b}a$ | 5     | $\text{Read }b$  |
 
 ## Macro
 
