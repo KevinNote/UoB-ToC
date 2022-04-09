@@ -32,7 +32,7 @@ T &= \{␣, a, b \}\\
 V &= \{ \text{Even}, \text{Odd} \}\\
 \end{aligned}
 $$
-我们可以定义这个 TM over $T,\ V$
+我们可以定义这个 TM over $T,\ V$ 的 *configuration*
 $$
 \begin{aligned}
 &X = \{3, 2, 6, 73, 51\}
@@ -53,7 +53,7 @@ $$
 \\
 \newcommand{\defeq}{\overset{\text{\tiny def}}{=}}
 \newcommand{\ldefeq}{\mathrel{\raisebox{-0.3ex}{$\defeq$}}}
-TM\defeq(X,\ p,\ \delta)
+\text{Configuration}\defeq(X,\ p,\ \delta)
 $$
 
 对于其使用，例如：
