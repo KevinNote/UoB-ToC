@@ -82,7 +82,7 @@ Then, combine them:
 
 ## 2-Tape TM
 
-![](img/Week7/2ttm.png)
+![](img/Week6/2ttm.png)
 
 对于 2-Tape TM 我们使用如下转换过程
 
@@ -107,7 +107,7 @@ $$
 
 对于转换关系我们可以模拟为如下：
 
-![](img/Week7/conv.png)
+![](img/Week6/conv.png)
 
 对于每一组 $\langle q_{Main}, q_{Aux}\rangle$ 会被解析为 $\langle h_{Main}, q_{Main}, h_{Aux}, q_{Aux}\rangle$
 - $h$ 表示 head 的状态，如果 Main 的 Head 在这一组，则会被解析为 $\langle H, q_{Main}, h_{Aux}, q_{Aux}\rangle$，如果不是则为 $\_$
@@ -134,15 +134,15 @@ $$
 
 ### Step 2: Simulating Program
 
-![](img/Week7/2tsim.png)
+![](img/Week6/2tsim.png)
 
 The Write Main b instruction:
 
-![](img/Week7/wmb.png)
+![](img/Week6/wmb.png)
 
 The Read Aux instruction:
 
-![](img/Week7/ra.png)
+![](img/Week6/ra.png)
 
 ### Step 3: Finishing Program
 
@@ -165,7 +165,7 @@ Which is equivalent to $\dot{b}baabb$.
 
 ## 2D TM
 
-![](img/Week7/2dtm.png)
+![](img/Week6/2dtm.png)
 
 对于内容
 $$
